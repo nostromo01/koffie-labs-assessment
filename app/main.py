@@ -1,11 +1,10 @@
 import uvicorn
 from fastapi import FastAPI, Depends
 from fastapi.exceptions import RequestValidationError, ValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from sqlalchemy.orm import Session
 import json
 
-from starlette.responses import FileResponse
 
 from app import routes
 from app.models import Vehicle, get_db
@@ -25,12 +24,12 @@ async def validation_exception_handler(_, exc):
     return JSONResponse(response, status_code=422)
 
 
-@app.get('/lookup/{vin}')
+@app.get('/lookup/{vin}', response_class=JSONResponse)
 async def lookup(db: Session = Depends(get_db), vehicle: Vehicle = Depends(Vehicle)):
     return await routes.fetch_vehicle(db, vehicle)
 
 
-@app.get('/remove/{vin}')
+@app.get('/remove/{vin}', response_class=JSONResponse)
 async def remove(db: Session = Depends(get_db), vehicle: Vehicle = Depends(Vehicle)):
     return await routes.remove_vehicle(db, vehicle)
 
