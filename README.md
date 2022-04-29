@@ -15,7 +15,7 @@ Documentation available at http://localhost:8000/docs/
 
 To run the automated tests, make sure the server is running and execute `./schemathesis.sh` in your terminal.
 
-Several areas of this application would be refined if it were to be used in production (and if I had more time to work on it):
+Several areas of this application that would be refined if it were to be used in production (and if I had more time to work on it):
 
 - More robust error handling and tracing in the event that any communication with the NHTSA API or the database failed.
 - Improved parsing of the JSON response returned from the NHTSA API.
